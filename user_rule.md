@@ -1,15 +1,15 @@
-<!-- Ví dụ cách bạn có thể thêm vào user_rules của mình -->
+<!-- Example of how you can add to your user_rules -->
 <rule name="task_management_workflow">
-    <description>Quy tắc cho AI agent khi làm việc với hệ thống task Markdown.</description>
-    <guideline>Khi được yêu cầu làm việc với một task trong hệ thống task Markdown (cấu trúc Version/Phase/task-NN.md):</guideline>
-    <guideline>1.  **Nhận Task:** Chỉ làm việc trên task được giao trực tiếp hoặc task 'Todo' phù hợp với yêu cầu tìm kiếm của USER. Luôn kiểm tra và tôn trọng trường 'Người thực hiện'.</guideline>
-    <guideline>2.  **Kiểm tra Dependencies:** Trước khi bắt đầu, xác minh tất cả các task trong mục 'Dependencies' của file task đã ở trạng thái 'Done'. Nếu chưa, thông báo cho USER và không tiến hành trừ khi được chỉ dẫn khác.</guideline>
-    <guideline>3.  **Cập nhật Trạng thái:** Ngay khi bắt đầu một task, đề xuất cập nhật trạng thái của file task thành 'InProgress_By_[Tên_AI_Agent]' và ghi log vào 'AI Agent Log'.</guideline>
-    <guideline>4.  **Thực hiện Sub-tasks:** Xử lý tuần tự các công việc con. Sau mỗi sub-task hoàn thành, đề xuất đánh dấu checkbox và ghi log chi tiết vào 'AI Agent Log'.</guideline>
-    <guideline>5.  **Quản lý Code (Nếu có):** Luôn `git pull` trước khi bắt đầu code. Đề xuất `git commit` thường xuyên với message rõ ràng (bao gồm TaskID). Đề xuất `git push` khi hoàn thành phần code của task.</guideline>
-    <guideline>6.  **Xử lý Blockers:** Nếu gặp vấn đề, đề xuất cập nhật trạng thái task thành 'Blocked_By_[Lý_Do]', ghi log chi tiết và thông báo ngay cho USER.</guideline>
-    <guideline>7.  **Hoàn thành Task:** Khi tất cả sub-tasks và tiêu chí hoàn thành được đáp ứng, đề xuất cập nhật trạng thái task thành 'NeedsReview' (hoặc 'Done' nếu phù hợp) và thông báo cho USER.</guideline>
-    <guideline>8.  **Cập nhật File Task:** Mọi thay đổi đối với file task (trạng thái, checkbox, log) phải được thực hiện bằng cách đề xuất nội dung cập nhật cho USER áp dụng (ví dụ: qua công cụ `propose_code`).</guideline>
-    <guideline>9.  **Giao tiếp:** Thường xuyên thông báo cho USER về tiến độ, các vấn đề gặp phải, và khi task hoàn thành hoặc cần review.</guideline>
-    <guideline>10. **Bám sát file task:** Luôn lấy thông tin chi tiết, tiêu chí hoàn thành, và các bước thực hiện từ file task được chỉ định. Không tự ý thay đổi phạm vi task trừ khi được USER đồng ý và cập nhật vào file task.</guideline>
+    <description>Rules for AI agents when working with the Markdown task system.</description>
+    <guideline>When requested to work with a task in the Markdown task system (structure Version/Phase/task-NN.md):</guideline>
+    <guideline>1.  **Receive Task:** Only work on tasks that are directly assigned or 'Todo' tasks that match the USER's search request. Always check and respect the 'Assignee' field.</guideline>
+    <guideline>2.  **Check Dependencies:** Before starting, verify that all tasks in the 'Dependencies' section of the task file are in 'Done' status. If not, notify the USER and do not proceed unless otherwise instructed.</guideline>
+    <guideline>3.  **Update Status:** As soon as starting a task, suggest updating the task file status to 'InProgress_By_[AI_Agent_Name]' and log in 'AI Agent Log'.</guideline>
+    <guideline>4.  **Execute Sub-tasks:** Handle sub-tasks sequentially. After each sub-task is completed, suggest marking the checkbox and logging details in 'AI Agent Log'.</guideline>
+    <guideline>5.  **Code Management (If applicable):** Always `git pull` before starting code. Suggest `git commit` frequently with clear messages (including TaskID). Suggest `git push` when completing the code portion of the task.</guideline>
+    <guideline>6.  **Handle Blockers:** If encountering issues, suggest updating task status to 'Blocked_By_[Reason]', log details and immediately notify the USER.</guideline>
+    <guideline>7.  **Complete Task:** When all sub-tasks and completion criteria are met, suggest updating task status to 'NeedsReview' (or 'Done' if appropriate) and notify the USER.</guideline>
+    <guideline>8.  **Update Task File:** All changes to task file (status, checkbox, log) must be done by suggesting content updates for USER to apply (e.g., via `propose_code` tool).</guideline>
+    <guideline>9.  **Communication:** Frequently notify the USER about progress, encountered issues, and when task is completed or needs review.</guideline>
+    <guideline>10. **Follow Task File:** Always get detailed information, completion criteria, and execution steps from the specified task file. Do not arbitrarily change task scope unless USER agrees and updates the task file.</guideline>
 </rule>

@@ -62,6 +62,7 @@ Below is how you can implement and points to note:
 
 In each `task_XX.YY.ZZ_ten_task.md` file, the Assignee field becomes very important.
 You (or a "project manager" AI if available) will assign a specific task to a specific AI agent. For example: Assignee: AI_Agent_Alpha or Assignee: AI_Agent_Beta.
+> **Note**: See [AI_agents.md](AI_agents.md) for the defined Agent Roles (PM, Architect, Developer, Reviewer) and their specific responsibilities.
 An AI agent should only work on tasks that have been assigned to them.
 Convention: An AI agent is not allowed to edit a task that has status InProgress_By_Another_Agent.
 

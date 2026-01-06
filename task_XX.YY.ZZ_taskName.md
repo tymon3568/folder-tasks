@@ -6,8 +6,10 @@ Sample Content for a task_XX.YY.ZZ_ten_task.md:
 **Phase:** 02_Backend_Core_Features
 **Module:** 02.01_Authentication
 **Priority:** High
-**Status:** Todo <!-- Todo, InProgress, Blocked, NeedsReview, Done -->
+**Status:** Todo <!-- ONLY valid: Todo | InProgress_By_[AgentName] | Blocked_By_[Reason] | NeedsReview | Done -->
 **Assignee (If any):**
+**Suggested Role:** Backend_Dev
+**Gates:** <!-- Optional, e.g. ProductionReady -->
 **Created Date:** 2025-06-05
 **Last Updated:** 2025-06-05
 
@@ -50,6 +52,16 @@ Create API endpoint that allows new users to register an account. The endpoint n
     - [ ] 7.4. Test registration with invalid password.
 - [ ] 8. Update `API_SPEC.yaml` file.
 - [ ] 9. (AI Agent) Review code and ensure compliance with project rules.
+
+## Quality Gates (must pass before NeedsReview)
+- [ ] Typecheck: `<command>`
+- [ ] Lint: `<command>`
+- [ ] Tests: `<command>`
+
+## Quality Gate Evidence
+- Typecheck output (summary):
+- Lint output (summary):
+- Tests output (summary):
 
 ## Related Documentation:
 - `docs/prd-en.md` (Registration related User Stories section)

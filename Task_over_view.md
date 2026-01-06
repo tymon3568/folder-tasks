@@ -10,6 +10,7 @@ Build application with main features to help users search and connect.
     - [x] Phase 00: Project Setup & Environment - `Completed` -> [Link to directory](./V1_MVP/00_Project_Setup_And_Environment/)
     - [ ] Phase 01: Database Schema & Seed Data - `In Progress` -> [Link to directory](./V1_MVP/01_Database_Schema_And_Seed_Data/)
     - [ ] Phase 02: Backend Core Features - `Todo` -> [Link to directory](./V1_MVP/02_Backend_Core_Features/)
+    - [ ] Phase 99: Release & Production Readiness (Gating) - `Todo` -> [Link to directory](./V1_MVP/99_Release_And_Production_Readiness/)
     - ...
 
 ### [ ] Version 1.1: Post-Launch Enhancements - `Todo`

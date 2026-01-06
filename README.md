@@ -1,8 +1,8 @@
 This is documentation about how to create task management following directory structure, Jira-like style to manage project progress and workload for AIs working together.
 Task follows directory structure Version/Phase/task-NN.md Directory Structure and Files:
 /project_root
+├── Task_over_view.md  <-- High-level overview file (repo default)
 ├── docs/
-│   ├── TASKS_OVERVIEW.md  <-- High-level overview file
 │   │
 │   ├── V1_MVP/  <-- Version 1: Minimum Viable Product
 │   │   ├── 00_Project_Setup_And_Environment/  <-- Phase 0
@@ -92,7 +92,7 @@ Encourage small, frequent commits for each completed sub-task portion.
 
 #### Through Task Files
 Task files are the main communication channel. AI agents update status and log work in AI Agent Log.
-TASKS_OVERVIEW.md: This file helps all agents (and you) have an overview of overall progress.
+Task_over_view.md: This file helps all agents (and you) have an overview of overall progress.
 
 #### Notify You
 When an AI agent completes an important task, encounters issues, or needs review, it should notify you.
@@ -103,7 +103,7 @@ When an AI agent completes an important task, encounters issues, or needs review
 You will be the one to decide which task is assigned to which agent, or set up rules for agents to pick tasks themselves.
 
 #### Monitor Progress
-Based on TASKS_OVERVIEW.md and status of task files.
+Based on Task_over_view.md and status of task files.
 
 #### Resolve Conflicts
 Intervene when there are issues (merge conflicts, task blocked for too long, misunderstanding requirements).
@@ -147,7 +147,7 @@ Phase 0: Initial Setup (Perform once or when major changes occur)
 
 Understand Task Structure:
 AI agent is provided with information about the directory structure (Version/Phase/task-NN.md) and sample content of a detailed task file.
-AI agent knows about the existence and purpose of TASKS_OVERVIEW.md.
+AI agent knows about the existence and purpose of Task_over_view.md.
 Tools: AI agent understands that updating .md files (marking checkboxes, changing status, logging) will be done through proposing content changes (e.g., using the propose_code tool in my "chat mode", you will be the one applying the changes).
 
 Phase 1: Receive and Initialize Task

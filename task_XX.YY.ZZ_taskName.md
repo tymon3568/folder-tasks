@@ -6,7 +6,7 @@ Sample Content for a task_XX.YY.ZZ_ten_task.md:
 **Phase:** 02_Backend_Core_Features
 **Module:** 02.01_Authentication
 **Priority:** High
-**Status:** Todo <!-- Todo, InProgress, Blocked, NeedsReview, Done -->
+**Status:** Todo <!-- Todo, InProgress, Blocked, NeedsReview, Done, Cancelled -->
 **Assignee (If any):**
 **Created Date:** 2025-06-05
 **Last Updated:** 2025-06-05

@@ -6,9 +6,11 @@ Build application with main features to help users search and connect.
 
 ## Roadmap & Status
 
-### [ ] Version 1: MVP (Minimum Viable Product) - `In Progress`
-    - [x] Phase 00: Project Setup & Environment - `Completed` -> [Link to directory](./V1_MVP/00_Project_Setup_And_Environment/)
-    - [ ] Phase 01: Database Schema & Seed Data - `In Progress` -> [Link to directory](./V1_MVP/01_Database_Schema_And_Seed_Data/)
+> **Supported task statuses (from workflow):** `Todo`, `InProgress_By_[AgentName]`, `Blocked_By_[Reason]`, `NeedsReview`, `Done`, `Cancelled`
+
+### [ ] Version 1: MVP (Minimum Viable Product) - `InProgress_By_[AgentName]`
+    - [x] Phase 00: Project Setup & Environment - `Done` -> [Link to directory](./V1_MVP/00_Project_Setup_And_Environment/)
+    - [ ] Phase 01: Database Schema & Seed Data - `InProgress_By_[AgentName]` -> [Link to directory](./V1_MVP/01_Database_Schema_And_Seed_Data/)
     - [ ] Phase 02: Backend Core Features - `Todo` -> [Link to directory](./V1_MVP/02_Backend_Core_Features/)
     - ...
 

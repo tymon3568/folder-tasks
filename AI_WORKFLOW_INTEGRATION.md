@@ -12,7 +12,7 @@ This repository runs **multiple agents in parallel**. Coordination happens **onl
 - Task files (`PROJECT_TRACKING/**/task_*.md`) are the only source of truth for work state.
 - Agents MUST update the task file **before** any code work to avoid race conditions.
 
-## 0.2 Strict Status Adherence (ONLY these 5 statuses are valid)
+## 0.2 Strict Status Adherence (ONLY these 6 statuses are valid)
 | Status | Meaning |
 |---|---|
 | `Todo` | Ready to be claimed |
@@ -20,6 +20,7 @@ This repository runs **multiple agents in parallel**. Coordination happens **onl
 | `Blocked_By_[Reason]` | Cannot proceed; must include reason |
 | `NeedsReview` | Work complete; awaiting review |
 | `Done` | Reviewed and approved |
+| `Cancelled` | Task is intentionally stopped and will not be worked on (must include a reason in Notes / AI Agent Log) |
 
 ❌ Invalid examples (never use): `InProgress`, `InProgress_By` (missing agent name), `Completed`, `Pending`, `Waiting`, `Done_By_AI`, etc.
 

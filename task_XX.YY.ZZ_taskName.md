@@ -1,5 +1,4 @@
-Sample Content for a task_XX.YY.ZZ_ten_task.md:
-# Task: User Registration Endpoint
+# Task: User Registration Endpoint (Example)
 
 **Task ID:** `V1_MVP/02_Backend_Core_Features/02.01_Authentication/task_02.01.01_user_registration_endpoint.md`
 **Version:** V1_MVP
@@ -11,54 +10,101 @@ Sample Content for a task_XX.YY.ZZ_ten_task.md:
 **Created Date:** 2025-06-05
 **Last Updated:** 2025-06-05
 
-## Detailed Description:
+## 1. Detailed Description
 Create API endpoint that allows new users to register an account. The endpoint needs to receive user information (email, password, name), validate input, hash password, and save information to database.
 
-## Completion Criteria (Acceptance Criteria):
-- [ ] Endpoint `POST /api/v1/auth/register` is created.
-- [ ] Receives input: `email`, `password`, `full_name`.
-- [ ] Validate email (format, no duplicates).
-- [ ] Validate password (minimum length, basic complexity).
-- [ ] Hash password using Argon2 (or bcrypt) before saving.
-- [ ] Save new user information to `users` table in SurrealDB.
-- [ ] Return user information (excluding password hash) and JWT token if registration is successful.
-- [ ] Return appropriate error if validation fails or server error occurs.
-- [ ] Have unit tests for registration logic.
-- [ ] Update `API_SPEC.yaml` with new endpoint definition.
+## 2. UI/UX Specifications (If Frontend Task)
+> *Note: Since this is a Backend task, this section serves as reference for API requirements.*
+*   **Design:** [Figma Link Placeholder]
+*   **Form Fields:** Email, Full Name, Password, Confirm Password.
+*   **States:**
+    *   Loading spinner during API call.
+    *   Inline validation errors (Red text).
+    *   Success toast on 201 Created.
 
-## Specific Sub-tasks:
+## 3. Workflow / Interaction Flow
+1.  **Client** sends `POST /api/v1/auth/register` with JSON payload.
+2.  **Server (Axum)** receives request.
+3.  **Validation Layer:**
+    *   Check email format (Regex).
+    *   Check password complexity (Min 8 chars).
+    *   Check if email already exists in `users` table.
+4.  **Processing:**
+    *   Hash password using Argon2.
+    *   Create `User` record in SurrealDB.
+    *   Generate JWT Token.
+5.  **Response:**
+    *   Return 201 Created + User Data + Token.
+    *   Or Return 400/409/500 with Error Code.
+
+## 4. Technical Specifications
+### 4.1. API & Data
+*   **Endpoint:** `POST /api/v1/auth/register`
+*   **Request Body:**
+    ```json
+    {
+      "email": "user@example.com",
+      "password": "SecretPassword123!",
+      "full_name": "John Doe"
+    }
+    ```
+*   **Response (Success):**
+    ```json
+    {
+      "user": {
+        "id": "users:ulid_string",
+        "email": "user@example.com",
+        "full_name": "John Doe",
+        "created_at": "2025-06-05T10:00:00Z"
+      },
+      "token": "eyJhbGciOiJIUzI1Ni..."
+    }
+    ```
+
+### 4.2. Error Mapping
+| HTTP Code | Error Code | Message Key | Condition |
+| :--- | :--- | :--- | :--- |
+| 400 | `VAL_INVALID_EMAIL` | `auth.error.invalid_email` | Regex fail |
+| 400 | `VAL_WEAK_PASSWORD` | `auth.error.weak_password` | < 8 chars |
+| 409 | `AUTH_EMAIL_EXISTS` | `auth.error.email_exists` | Email found in DB |
+| 500 | `SYS_INTERNAL_ERROR`| `common.error.internal` | DB connection fail |
+
+## 5. Non-Functional Requirements (Constraints)
+*   **Security:** NEVER log raw passwords.
+*   **Performance:** Hashing (Argon2) should be tuned to take ~0.5s (balance security/speed).
+*   **Code Quality:** Structs must use `validator` crate annotations.
+
+## 6. Implementation Steps (Specific Sub-tasks)
 - [ ] 1. Define Request and Response structs for API in Rust.
-    - [ ] 1.1. `RegisterUserRequest { email: String, password: String, full_name: String }`
-    - [ ] 1.2. `UserResponse { id: RecordId, email: String, full_name: String, created_at: Datetime }` (or similar)
-    - [ ] 1.3. `AuthResponse { user: UserResponse, token: String }`
-- [ ] 2. Write validation logic for `email` (use regex, check existence in DB).
-- [ ] 3. Write validation logic for `password` (e.g., at least 8 characters).
-- [ ] 4. Integrate password hashing library (e.g., `argon2`).
-- [ ] 5. Write handler function for endpoint in Axum.
-    - [ ] 5.1. Receive and deserialize request.
-    - [ ] 5.2. Call validation functions.
-    - [ ] 5.3. Hash password.
-    - [ ] 5.4. Create SurrealQL statement to `INSERT` new user.
-    - [ ] 5.5. Execute SurrealQL statement.
-    - [ ] 5.6. Generate JWT token.
-    - [ ] 5.7. Serialize and return success response or error.
-- [ ] 6. Register route in Axum.
-- [ ] 7. Write Unit Tests:
-    - [ ] 7.1. Test successful registration.
-    - [ ] 7.2. Test registration with existing email.
-    - [ ] 7.3. Test registration with invalid email.
-    - [ ] 7.4. Test registration with invalid password.
-- [ ] 8. Update `API_SPEC.yaml` file.
-- [ ] 9. (AI Agent) Review code and ensure compliance with project rules.
+    - [ ] 1.1. `RegisterUserRequest { email, password, full_name }`
+    - [ ] 1.2. `UserResponse` & `AuthResponse`
+- [ ] 2. Write validation logic for `email` & `password`.
+- [ ] 3. Integrate password hashing library (`argon2`).
+- [ ] 4. Write handler function for endpoint in Axum.
+    - [ ] 4.1. Receive and deserialize request.
+    - [ ] 4.2. Call validation functions.
+    - [ ] 4.3. Check DB for duplicate email.
+    - [ ] 4.4. Hash password.
+    - [ ] 4.5. Execute SurrealQL `INSERT`.
+    - [ ] 4.6. Generate JWT.
+- [ ] 5. Register route in Axum Router.
+- [ ] 6. Write Unit/Integration Tests.
+- [ ] 7. Update `API_SPEC.yaml`.
+- [ ] 8. (AI Agent) Review code for best practices.
 
-## Related Documentation:
-- `docs/prd-en.md` (Registration related User Stories section)
-- `docs/SCHEMA.surql` (Users table)
-- `docs/API_SPEC.yaml`
-- `docs/TECHNICAL_SPEC.md` (Authentication section)
+## 7. AI Context (Hints for Agent)
+*   **Reference Files:**
+    *   `src/models/user_model.rs` (Struct definitions)
+    *   `src/web/routes_auth.rs` (Handler implementation)
+    *   `docs/SCHEMA.surql` (Database Schema)
 
-## Dependencies (Tasks that need to be completed first):
-- `V1_MVP/01_Database_Schema_And_Seed_Data/task_01.01_define_core_schemas.md` (Users table has been defined)
+## 8. Completion Criteria
+- [ ] Endpoint `POST /api/v1/auth/register` is accessible.
+- [ ] Valid registration returns 201 + Token.
+- [ ] Duplicate email returns 409.
+- [ ] Invalid password returns 400.
+- [ ] Passwords are stored as hashes (not plain text).
+- [ ] Unit tests pass.
 
 ## Notes / Discussion:
 - Consider using `validator` library for struct validation.
@@ -67,5 +113,3 @@ Create API endpoint that allows new users to register an account. The endpoint n
 ---
 ## AI Agent Log (For AI updates):
 *   *2025-06-05 10:30: Started processing task. Reviewed `SCHEMA.surql`.*
-*   *2025-06-05 11:00: Proposed Request/Response structs for sub-task 1.*
----
